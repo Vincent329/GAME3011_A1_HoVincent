@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager instance;
 
+    public bool inGame;
     public static GameManager Instance
     {
         get => instance;
@@ -13,7 +14,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject tileGameCanvas;
-
 
     private void Awake()
     {
@@ -29,8 +29,15 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        inGame = false;
         tileGameCanvas.SetActive(false);
         Debug.Log(tileGameCanvas.activeInHierarchy);
     }
+
+    private void Update()
+    {
+        tileGameCanvas.SetActive(inGame);
+    }
+
 
 }
