@@ -11,6 +11,10 @@ public class GameManager : MonoBehaviour
         get => instance;
     }
 
+    [SerializeField]
+    private GameObject tileGameCanvas;
+
+
     private void Awake()
     {
         if (instance != null )
@@ -23,16 +27,10 @@ public class GameManager : MonoBehaviour
             DontDestroyOnLoad(gameObject);
         }
     }
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        tileGameCanvas.SetActive(false);
+        Debug.Log(tileGameCanvas.activeInHierarchy);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
