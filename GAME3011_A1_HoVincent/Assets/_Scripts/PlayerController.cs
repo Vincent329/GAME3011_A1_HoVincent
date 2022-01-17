@@ -48,7 +48,6 @@ public class PlayerController : MonoBehaviour
     {
         Vector2 moveValue = moveAction.ReadValue<Vector2>();
         playerVelocity = new Vector3(moveValue.x, 0, moveValue.y);
-        Debug.Log(moveValue);
         
     }
 
