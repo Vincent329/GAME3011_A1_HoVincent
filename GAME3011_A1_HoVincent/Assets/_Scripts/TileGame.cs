@@ -18,9 +18,7 @@ public class TileGame : MonoBehaviour
         tileSize = tilePrefab.GetComponent<RectTransform>().rect.width;
         Debug.Log(tileSize);
         InitGrid();
-        
     }
-
 
     void InitGrid()
     {

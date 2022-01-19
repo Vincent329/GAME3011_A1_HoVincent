@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour
 
     [Header ("Player Input System")]
     private PlayerInput playerInput;
+
     private InputAction moveAction;
 
 
