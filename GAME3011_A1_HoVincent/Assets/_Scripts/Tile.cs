@@ -10,7 +10,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     private TileType tileType;
     [SerializeField]
     private int scoreValue;
-
+    public int ScoreValue => scoreValue;
 
     // Start is called before the first frame update
     void Start()

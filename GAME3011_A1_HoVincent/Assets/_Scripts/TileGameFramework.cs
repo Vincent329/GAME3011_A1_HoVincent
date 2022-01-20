@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TileGame : MonoBehaviour
+public class TileGameFramework : MonoBehaviour
 {
 
     [SerializeField] private int width;
@@ -13,11 +13,16 @@ public class TileGame : MonoBehaviour
     [Header("Tile Prefab")]
     [SerializeField] private Tile tilePrefab;
     float tileSize;
+
+    // Store the Tiles in an array
+    private Tile[,] tileAreaArray;
+
     // Start is called before the first frame update
     void Start()
     {
         tileSize = tilePrefab.GetComponent<RectTransform>().rect.width / 2;
         Debug.Log(tileSize);
+        tileAreaArray = new Tile[width, height];
         InitGrid();
     }
 
@@ -29,9 +34,26 @@ public class TileGame : MonoBehaviour
             {
                 var tile = Instantiate(tilePrefab, new Vector3(i * tileSize + transform.position.x, j * tileSize +transform.position.y), Quaternion.identity);
                 tile.name = $"tile {i},{j}";
-                tile.GetComponent<Tile>().SetTileValue((TileType)Random.Range(0, (int)TileType.NUM_OF_TILETYPES));
+                //tile.GetComponent<Tile>().SetTileValue((TileType)Random.Range(0, (int)TileType.NUM_OF_TILETYPES));
                 tile.transform.SetParent(this.transform);
+
+                // place the tile in the array
+                tileAreaArray[i, j] = tile;
             }
         }
+
+        PlaceScoreValues();
     }
+
+    // this function will be used to delegate score values to the surrrounding tiles
+    void PlaceScoreValues()
+    {
+        int x = Random.Range(0, width);
+        int y = Random.Range(0, height);
+
+        Tile testTile = tileAreaArray[x, y];
+        Debug.Log(testTile);
+    }
+
+
 }
