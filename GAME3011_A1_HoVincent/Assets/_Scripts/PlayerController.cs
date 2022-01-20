@@ -23,33 +23,37 @@ public class PlayerController : MonoBehaviour
     }
 
     [Header ("Player Input System")]
-    private PlayerInput playerInput;
+    
 
     private InputAction moveAction;
 
 
     private void Awake()
     {
-        playerInput = GetComponent<PlayerInput>();
         rb = GetComponent<Rigidbody>();
     }
     // Start is called before the first frame update
     void Start()
     {
-        moveAction = playerInput.actions["Move"];
+        //moveAction = playerInput.actions["Move"];
     }
 
     // Update is called once per frame
     void Update()
     {
-        HandlePlayerInputs();
     }
 
-    private void HandlePlayerInputs()
-    {
-        Vector2 moveValue = moveAction.ReadValue<Vector2>();
-        playerVelocity = new Vector3(moveValue.x, 0, moveValue.y);
+    //private void HandlePlayerInputs()
+    //{
+    //    Vector2 moveValue = moveAction.ReadValue<Vector2>();
+    //    playerVelocity = new Vector3(moveValue.x, 0, moveValue.y);
         
+    //}
+
+    public void OnMove(InputValue value)
+    {
+        Vector2 moveValue = value.Get<Vector2>();
+        playerVelocity = new Vector3(moveValue.x, 0, moveValue.y);
     }
 
     private void FixedUpdate()
