@@ -24,7 +24,7 @@ public class TileGameFramework : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        tileSize = tilePrefab.GetComponent<RectTransform>().rect.width / 2;
+        tileSize = tilePrefab.GetComponent<RectTransform>().rect.width / 1.35f;
         tileAreaArray = new Tile[width, height];
         InitGrid();
     }

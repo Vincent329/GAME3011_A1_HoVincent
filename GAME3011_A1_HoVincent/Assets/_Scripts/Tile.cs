@@ -16,7 +16,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-        tileType = TileType.EMPTY;
     }
 
     // Update is called once per frame
@@ -28,6 +27,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     public void SetTileValue(TileType type)
     {
         tileType = type;
+        Debug.Log(tileType);
         TileDesignation();
     }
 
