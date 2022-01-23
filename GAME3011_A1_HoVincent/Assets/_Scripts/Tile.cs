@@ -8,6 +8,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
     [SerializeField]
     private TileType tileType;
+    public TileType GetTileType => tileType;
     [SerializeField]
     private int scoreValue;
     public int ScoreValue => scoreValue;
@@ -15,7 +16,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     // Start is called before the first frame update
     void Start()
     {
-
+        tileType = TileType.EMPTY;
     }
 
     // Update is called once per frame
