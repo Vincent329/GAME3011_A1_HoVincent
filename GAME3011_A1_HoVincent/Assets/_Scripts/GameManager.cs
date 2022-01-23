@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private GameObject tileGameCanvas;
+    [SerializeField]
+    private GameObject promptText;
 
     public UnityAction m_ToggleCanvas;
 
@@ -37,14 +39,14 @@ public class GameManager : MonoBehaviour
         Debug.Log(tileGameCanvas.activeInHierarchy);
     }
 
-    private void Update()
-    {
-        tileGameCanvas.SetActive(inGame);
-    }
+    //private void Update()
+    //{
+    //    tileGameCanvas.SetActive(inGame);
+    //}
 
-    private void toggleTileGameCanvas()
+    public void toggleTileGameCanvas(bool toggle)
     {
-        tileGameCanvas.SetActive(inGame);
+        tileGameCanvas.SetActive(toggle);
 
     }
 

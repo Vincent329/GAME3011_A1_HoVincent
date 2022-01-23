@@ -55,5 +55,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData pointerEventData)
     {
         Debug.Log(scoreValue);
+        // delegate the handling of score here
     }
 }

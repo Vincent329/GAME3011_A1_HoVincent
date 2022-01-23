@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// Framework and initialization of states for the Tile Game
+/// </summary>
 public class TileGameFramework : MonoBehaviour
 {
 
@@ -52,7 +56,8 @@ public class TileGameFramework : MonoBehaviour
         int y = Random.Range(0, height);
 
         Tile testTile = tileAreaArray[x, y];
-        Debug.Log(testTile);
+        testTile.SetTileValue(TileType.HIGH_GRADE);
+        Debug.Log(testTile.ScoreValue);
     }
 
 

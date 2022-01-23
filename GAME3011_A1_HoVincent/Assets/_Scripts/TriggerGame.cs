@@ -30,6 +30,7 @@ public class TriggerGame : MonoBehaviour
         if (other.gameObject.GetComponent<PlayerController>() != null)
         {
             GameManager.Instance.inGame = false;
+            GameManager.Instance.toggleTileGameCanvas(GameManager.Instance.inGame);
         }
         Debug.Log(GameManager.Instance.inGame);
     }

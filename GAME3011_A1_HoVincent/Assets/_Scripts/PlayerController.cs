@@ -47,13 +47,23 @@ public class PlayerController : MonoBehaviour
     //{
     //    Vector2 moveValue = moveAction.ReadValue<Vector2>();
     //    playerVelocity = new Vector3(moveValue.x, 0, moveValue.y);
-        
     //}
 
     public void OnMove(InputValue value)
     {
         Vector2 moveValue = value.Get<Vector2>();
         playerVelocity = new Vector3(moveValue.x, 0, moveValue.y);
+    }
+
+    public void OnActivate(InputValue value)
+    {
+        if (GameManager.Instance.inGame == true)
+        {
+            GameManager.Instance.toggleTileGameCanvas(true);
+        } else
+        {
+            Debug.Log("Not in the Zone");
+        }
     }
 
     private void FixedUpdate()
