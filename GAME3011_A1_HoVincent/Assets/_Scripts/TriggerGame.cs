@@ -25,6 +25,10 @@ public class TriggerGame : MonoBehaviour
         Debug.Log(GameManager.Instance.inGame);
     }
 
+    /// <summary>
+    /// Exiting the volume turns off the 
+    /// </summary>
+    /// <param name="other"></param>
     private void OnTriggerExit(Collider other)
     {
         if (other.gameObject.GetComponent<PlayerController>() != null)

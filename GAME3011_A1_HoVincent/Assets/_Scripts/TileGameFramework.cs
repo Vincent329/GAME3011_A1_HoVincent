@@ -40,7 +40,7 @@ public class TileGameFramework : MonoBehaviour
                 //tile.GetComponent<Tile>().SetTileValue((TileType)Random.Range(0, (int)TileType.NUM_OF_TILETYPES));
                 tile.transform.SetParent(this.transform);
 
-                // place the tile in the array
+                // assign the tile in the array
                 tileAreaArray[i, j] = tile;
             }
         }
@@ -54,11 +54,41 @@ public class TileGameFramework : MonoBehaviour
         int x = Random.Range(0, width);
         int y = Random.Range(0, height);
 
-        tileAreaArray[x, y].SetTileValue(TileType.HIGH_GRADE);
-        //Debug.Log(testTile.ScoreValue);
+        //tileAreaArray[x, y].SetTileValue(TileType.HIGH_GRADE);
+        ////Debug.Log(testTile.ScoreValue);
 
+        //// first layer of surrounding tiles
+        //for (int i = x-1; i  <= x+1; i++)
+        //{
+        //    for (int j = y - 1; j <= y + 1; j++)
+        //    {
+        //        if (i >= 0 && i < width && j >= 0 && j < height)
+        //        {
+        //            Debug.Log(tileAreaArray[i, j]);
+
+        //            Debug.Log("Possible Tile Found");
+        //            //if (i != x || j != y)
+        //            if (tileAreaArray[i, j].GetTileType != TileType.HIGH_GRADE)
+        //            {
+        //                tileAreaArray[i, j].SetTileValue(TileType.MID_GRADE);
+        //                Debug.Log(tileAreaArray[i, j].ScoreValue);
+        //            }  else 
+        //            {
+        //                Debug.Log("This is a High Grade Tile");
+        //            }
+
+        //        }
+        //    }
+        //}
+        AreaCheck(x, y);
+    }
+
+    void AreaCheck(int x, int y)
+    {
+        // set the high grade tile
+        tileAreaArray[x, y].SetTileValue(TileType.HIGH_GRADE);
         // first layer of surrounding tiles
-        for (int i = x-1; i  <= x+1; i++)
+        for (int i = x - 1; i <= x + 1; i++)
         {
             for (int j = y - 1; j <= y + 1; j++)
             {
@@ -67,16 +97,45 @@ public class TileGameFramework : MonoBehaviour
                     Debug.Log(tileAreaArray[i, j]);
 
                     Debug.Log("Possible Tile Found");
-                    if (i != x || j != y)
+                    //if (i != x || j != y)
+                    if (tileAreaArray[i, j].GetTileType != TileType.HIGH_GRADE)
                     {
                         tileAreaArray[i, j].SetTileValue(TileType.MID_GRADE);
                         Debug.Log(tileAreaArray[i, j].ScoreValue);
-                    }  
-                    
+                    }
+                    else
+                    {
+                        Debug.Log("This is a High Grade Tile");
+                    }
+
+                }
+            }
+        }
+        //2nd layer of surrounding tiles
+        for (int i = x - 2; i <= x + 2; i++)
+        {
+            for (int j = y - 2; j <= y + 2; j++)
+            {
+                if (i >= 0 && i < width && j >= 0 && j < height)
+                {
+                    Debug.Log(tileAreaArray[i, j]);
+
+                    Debug.Log("Possible Tile Found");
+                    //if (i != x || j != y)
+                    if (tileAreaArray[i, j].GetTileType != TileType.HIGH_GRADE
+                        && tileAreaArray[i, j].GetTileType != TileType.MID_GRADE)
+                    {
+                        tileAreaArray[i, j].SetTileValue(TileType.LOW_GRADE);
+                        Debug.Log(tileAreaArray[i, j].ScoreValue);
+                    }
+                    else
+                    {
+                        Debug.Log("This is a High or Grade Tile");
+                    }
+
                 }
             }
         }
     }
-
 
 }
