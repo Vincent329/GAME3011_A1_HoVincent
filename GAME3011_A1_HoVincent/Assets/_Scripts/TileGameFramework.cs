@@ -24,7 +24,6 @@ public class TileGameFramework : MonoBehaviour
     // Keep track of a list of high grade materials based on difficulty
     [SerializeField] private List<Tile> highGradeTiles;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +39,7 @@ public class TileGameFramework : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                var tile = Instantiate(tilePrefab, new Vector3(i * tileSize + transform.position.x, j * tileSize +transform.position.y), Quaternion.identity);
+                var tile = Instantiate(tilePrefab, /*new Vector3(i * tileSize + transform.position.x, j * tileSize +transform.position.y)*/Vector3.zero, Quaternion.identity);
                 tile.name = $"tile {i},{j}";
                 //tile.GetComponent<Tile>().SetTileValue((TileType)Random.Range(0, (int)TileType.NUM_OF_TILETYPES));
                 tile.transform.SetParent(this.transform);
