@@ -50,5 +50,10 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void togglePrompt(bool toggle)
+    {
+        promptText.SetActive(toggle);
+    }
+
 
 }

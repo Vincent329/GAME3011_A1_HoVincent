@@ -21,9 +21,14 @@ public class TileGameFramework : MonoBehaviour
     // Store the Tiles in an array
     private Tile[,] tileAreaArray;
 
+    // Keep track of a list of high grade materials based on difficulty
+    [SerializeField] private List<Tile> highGradeTiles;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        highGradeTiles = new List<Tile>();
         tileSize = tilePrefab.GetComponent<RectTransform>().rect.width / 1.35f;
         tileAreaArray = new Tile[width, height];
         InitGrid();
@@ -55,9 +60,8 @@ public class TileGameFramework : MonoBehaviour
         int y = Random.Range(0, height);
 
         //tileAreaArray[x, y].SetTileValue(TileType.HIGH_GRADE);
-        ////Debug.Log(testTile.ScoreValue);
-
-        //// first layer of surrounding tiles
+        //Debug.Log(testTile.ScoreValue);
+        // //first layer of surrounding tiles
         //for (int i = x-1; i  <= x+1; i++)
         //{
         //    for (int j = y - 1; j <= y + 1; j++)
@@ -76,17 +80,27 @@ public class TileGameFramework : MonoBehaviour
         //            {
         //                Debug.Log("This is a High Grade Tile");
         //            }
-
         //        }
         //    }
         //}
+
+        // set the high grade tile
+
+        foreach(Tile highGradeTile in highGradeTiles)
+        {
+        }
         AreaCheck(x, y);
     }
 
+    void CheckSurroundingTile()
+    {
+
+    }
     void AreaCheck(int x, int y)
     {
-        // set the high grade tile
         tileAreaArray[x, y].SetTileValue(TileType.HIGH_GRADE);
+        highGradeTiles.Add(tileAreaArray[x, y]);
+
         // first layer of surrounding tiles
         for (int i = x - 1; i <= x + 1; i++)
         {
@@ -111,6 +125,7 @@ public class TileGameFramework : MonoBehaviour
                 }
             }
         }
+
         //2nd layer of surrounding tiles
         for (int i = x - 2; i <= x + 2; i++)
         {
@@ -120,7 +135,6 @@ public class TileGameFramework : MonoBehaviour
                 {
                     Debug.Log(tileAreaArray[i, j]);
 
-                    Debug.Log("Possible Tile Found");
                     //if (i != x || j != y)
                     if (tileAreaArray[i, j].GetTileType != TileType.HIGH_GRADE
                         && tileAreaArray[i, j].GetTileType != TileType.MID_GRADE)
@@ -130,7 +144,7 @@ public class TileGameFramework : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("This is a High or Grade Tile");
+                        Debug.Log("This is a High or Mid Grade Tile");
                     }
 
                 }
