@@ -60,7 +60,6 @@ public class TileGameFramework : MonoBehaviour
     // Called by delegate for scan mode
     void ScanSurroundingArea(int x, int y)
     {
-        Debug.Log("Scanning " + x + ", " + y);
         // first layer of surrounding tiles
         for (int i = x - 1; i <= x + 1; i++)
         {
@@ -106,31 +105,6 @@ public class TileGameFramework : MonoBehaviour
     {
         int x = Random.Range(0, width);
         int y = Random.Range(0, height);
-
-        //tileAreaArray[x, y].SetTileValue(TileType.HIGH_GRADE);
-        //Debug.Log(testTile.ScoreValue);
-        // //first layer of surrounding tiles
-        //for (int i = x-1; i  <= x+1; i++)
-        //{
-        //    for (int j = y - 1; j <= y + 1; j++)
-        //    {
-        //        if (i >= 0 && i < width && j >= 0 && j < height)
-        //        {
-        //            Debug.Log(tileAreaArray[i, j]);
-
-        //            Debug.Log("Possible Tile Found");
-        //            //if (i != x || j != y)
-        //            if (tileAreaArray[i, j].GetTileType != TileType.HIGH_GRADE)
-        //            {
-        //                tileAreaArray[i, j].SetTileValue(TileType.MID_GRADE);
-        //                Debug.Log(tileAreaArray[i, j].ScoreValue);
-        //            }  else 
-        //            {
-        //                Debug.Log("This is a High Grade Tile");
-        //            }
-        //        }
-        //    }
-        //}
 
         // set the high grade tile
 

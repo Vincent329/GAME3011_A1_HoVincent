@@ -334,6 +334,7 @@ MonoBehaviour:
   scanLimit: 0
   tileGameCanvas: {fileID: 1443471799}
   promptText: {fileID: 0}
+  DigPrompts: []
 --- !u!4 &913239956
 Transform:
   m_ObjectHideFlags: 0
@@ -814,6 +815,10 @@ PrefabInstance:
     - target: {fileID: 2436191202395285525, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -260
+      objectReference: {fileID: 0}
+    - target: {fileID: 5344582101974688752, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
+      propertyPath: m_Name
+      value: Digs Panel
       objectReference: {fileID: 0}
     - target: {fileID: 5758829515649641982, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
       propertyPath: m_Name

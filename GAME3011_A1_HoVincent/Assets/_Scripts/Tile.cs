@@ -116,11 +116,14 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        if (GameManager.Instance.scanMode == false && active == true)
+        if (GameManager.Instance.scanMode == false && active == true 
+            && GameManager.Instance.digLimit > 0)
         {
             Debug.Log(scoreValue);
             RevealTile();
             GameManager.Instance.AddScore(scoreValue);
+            // decrement the extraction value
+            GameManager.Instance.UpdateDigIcons();
             active = false;
         } 
             else if (GameManager.Instance.scanMode == true)

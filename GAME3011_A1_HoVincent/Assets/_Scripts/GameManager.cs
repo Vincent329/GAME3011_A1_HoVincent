@@ -30,6 +30,8 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject promptText;
 
+    [SerializeField]
+    private List<GameObject> DigPrompts;
     // Delegates
     public delegate void ScanArea(int row, int column);
     public event ScanArea Scan;
@@ -57,6 +59,12 @@ public class GameManager : MonoBehaviour
         score = 0;
         digLimit = 3;
         scanLimit = 6;
+    }
+
+    public void UpdateDigIcons()
+    {
+        digLimit--;
+        DigPrompts[digLimit].SetActive(false);
     }
 
     public void ScanTiles(int x, int y)
