@@ -9,7 +9,6 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     [SerializeField]
     private int row, column;
 
-
     [SerializeField]
     private TileType tileType;
     public TileType GetTileType => tileType;
@@ -21,6 +20,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
     [SerializeField]
     private Sprite MinLoad, LowLoad, MidLoad, HighLoad;
+
     // Start is called before the first frame update
     void OnEnable()
     {
@@ -44,6 +44,12 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         tileType = type;
         Debug.Log(tileType);
         TileDesignation();
+    }
+
+    public void SetRowColumn(int x, int y)
+    {
+        row = x;
+        column = y;
     }
 
     private void TileDesignation()
@@ -95,10 +101,31 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         }
     }
 
+    public void RevealTileAtLocation(int x, int y)
+    {
+        if (x == row && y == column)
+        {
+            RevealTile();
+        }
+    }
+
+    public void ConcealTile()
+    {
+        
+    }
+
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        Debug.Log(scoreValue);
-        RevealTile();
-        // delegate the handling of score here
+        if (GameManager.Instance.scanMode == false)
+        {
+            Debug.Log(scoreValue);
+            RevealTile();
+        } 
+            else
+        {
+            // figure out scan mode functionality here
+            GameManager.Instance.ScanTiles(row, column);
+        }
+            // delegate the handling of score here
     }
 }

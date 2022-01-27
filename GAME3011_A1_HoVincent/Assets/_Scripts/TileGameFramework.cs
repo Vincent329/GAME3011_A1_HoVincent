@@ -31,6 +31,9 @@ public class TileGameFramework : MonoBehaviour
         tileSize = tilePrefab.GetComponent<RectTransform>().rect.width / 1.35f;
         tileAreaArray = new Tile[width, height];
         InitGrid();
+
+        // bind the delegate in the singleton
+        GameManager.Instance.Scan += ScanSurroundingArea;
     }
 
     void InitGrid()
@@ -46,10 +49,16 @@ public class TileGameFramework : MonoBehaviour
 
                 // assign the tile in the array
                 tileAreaArray[i, j] = tile;
+                tileAreaArray[i, j].SetRowColumn(i, j);
             }
         }
 
         PlaceScoreValues();
+    }
+
+    void ScanSurroundingArea(int x, int y)
+    {
+        Debug.Log("Scanning " + x + ", " + y);
     }
 
     // this function will be used to delegate score values to the surrrounding tiles

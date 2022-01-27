@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// Singleton that keeps track of UI elements and Game Statistics
+/// </summary>
 public class GameManager : MonoBehaviour
 {
+    // set up singleton
     private static GameManager instance;
 
     public bool inGame;
+
+    public bool scanMode;
     public static GameManager Instance
     {
         get => instance;
@@ -18,7 +24,9 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private GameObject promptText;
 
-    public UnityAction m_ToggleCanvas;
+    // Delegates
+    public delegate void ScanArea(int row, int column);
+    public event ScanArea Scan;
 
     private void Awake()
     {
@@ -35,24 +43,49 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         inGame = false;
+        scanMode = false;
         tileGameCanvas.SetActive(false);
         Debug.Log(tileGameCanvas.activeInHierarchy);
     }
 
-    //private void Update()
-    //{
-    //    tileGameCanvas.SetActive(inGame);
-    //}
+    public void ScanTiles(int x, int y)
+    {
+        Scan(x, y);
+    }
 
     public void toggleTileGameCanvas(bool toggle)
     {
         tileGameCanvas.SetActive(toggle);
-
     }
 
     public void togglePrompt(bool toggle)
     {
         promptText.SetActive(toggle);
+    }
+
+    public void ScanMode()
+    {
+        scanMode = true;
+    }
+
+    public void ExtractMode()
+    {
+        scanMode = false;
+    }
+
+    public void EasyToggle()
+    {
+
+    }
+
+    public void MediumToggle()
+    {
+
+    }
+
+    public void HardToggle()
+    {
+
     }
 
 
