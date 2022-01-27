@@ -59,6 +59,25 @@ public class TileGameFramework : MonoBehaviour
     void ScanSurroundingArea(int x, int y)
     {
         Debug.Log("Scanning " + x + ", " + y);
+        // first layer of surrounding tiles
+        for (int i = x - 1; i <= x + 1; i++)
+        {
+            for (int j = y - 1; j <= y + 1; j++)
+            {
+                if (i >= 0 && i < width && j >= 0 && j < height)
+                {
+                    Debug.Log(tileAreaArray[i, j]);
+
+                    Debug.Log("Possible Tile Found");
+                    //if (i != x || j != y)
+                    tileAreaArray[i, j].RevealTileAtLocation(i, j);
+
+                } else
+                {
+                    Debug.Log("Out of bounds");
+                }
+            }
+        }
     }
 
     // this function will be used to delegate score values to the surrrounding tiles
