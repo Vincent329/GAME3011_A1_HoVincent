@@ -19,24 +19,24 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     public int ScoreValue => scoreValue;
 
     [SerializeField]
-    private Sprite MinLoad, LowLoad, MidLoad, HighLoad;
+    private bool active;
+
+    [SerializeField]
+    private Sprite Covered, MinLoad, LowLoad, MidLoad, HighLoad;
+
+
 
     // Start is called before the first frame update
     void OnEnable()
     {
         imageComp = GetComponent<Image>();
+        Covered = UnityEditor.AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
         MinLoad = Resources.Load<Sprite>("Stone");
         LowLoad = Resources.Load<Sprite>("Coat");
         MidLoad = Resources.Load<Sprite>("Redstone");
         HighLoad = Resources.Load<Sprite>("Gold");
         TileDesignation();
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        active = true;
     }
 
     public void SetTileValue(TileType type)
@@ -111,19 +111,22 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
     public void ConcealTile()
     {
-        
+        imageComp.sprite = Covered;
     }
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        if (GameManager.Instance.scanMode == false)
+        if (GameManager.Instance.scanMode == false && active == true)
         {
             Debug.Log(scoreValue);
             RevealTile();
+            GameManager.Instance.AddScore(scoreValue);
+            active = false;
         } 
-            else
+            else if (GameManager.Instance.scanMode == true)
         {
             // figure out scan mode functionality here
+            // decrement scan counter in game manager instance
             GameManager.Instance.ScanTiles(row, column);
         }
             // delegate the handling of score here

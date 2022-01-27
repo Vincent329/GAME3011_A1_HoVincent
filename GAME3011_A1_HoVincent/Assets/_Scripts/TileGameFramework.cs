@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 /// <summary>
 /// Framework and initialization of states for the Tile Game
+/// also handles any visual changes regarding the tiles
 /// </summary>
 public class TileGameFramework : MonoBehaviour
 {
@@ -32,7 +33,7 @@ public class TileGameFramework : MonoBehaviour
         tileAreaArray = new Tile[width, height];
         InitGrid();
 
-        // bind the delegate in the singleton
+        // bind the function to the delegate in the singleton
         GameManager.Instance.Scan += ScanSurroundingArea;
     }
 
@@ -56,6 +57,7 @@ public class TileGameFramework : MonoBehaviour
         PlaceScoreValues();
     }
 
+    // Called by delegate for scan mode
     void ScanSurroundingArea(int x, int y)
     {
         Debug.Log("Scanning " + x + ", " + y);
@@ -66,20 +68,39 @@ public class TileGameFramework : MonoBehaviour
             {
                 if (i >= 0 && i < width && j >= 0 && j < height)
                 {
-                    Debug.Log(tileAreaArray[i, j]);
-
-                    Debug.Log("Possible Tile Found");
-                    //if (i != x || j != y)
                     tileAreaArray[i, j].RevealTileAtLocation(i, j);
+                } 
+                else
+                {
+                    Debug.Log("Out of bounds");
+                }
+            }
+        }
 
-                } else
+        StartCoroutine(forcedDelay(x, y));
+        
+    }
+
+    IEnumerator forcedDelay(int x, int y)
+    {
+        Debug.Log("Delay");
+        yield return new WaitForSeconds(1.0f);
+        // first layer of surrounding tiles
+        for (int i = x - 1; i <= x + 1; i++)
+        {
+            for (int j = y - 1; j <= y + 1; j++)
+            {
+                if (i >= 0 && i < width && j >= 0 && j < height)
+                {
+                    tileAreaArray[i, j].ConcealTile();
+                }
+                else
                 {
                     Debug.Log("Out of bounds");
                 }
             }
         }
     }
-
     // this function will be used to delegate score values to the surrrounding tiles
     void PlaceScoreValues()
     {

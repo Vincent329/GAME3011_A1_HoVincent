@@ -12,8 +12,14 @@ public class GameManager : MonoBehaviour
     private static GameManager instance;
 
     public bool inGame;
-
     public bool scanMode;
+
+    [SerializeField]
+    private int score;
+
+    public int digLimit;
+    public int scanLimit;
+
     public static GameManager Instance
     {
         get => instance;
@@ -42,10 +48,15 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
+        // Initialize variables
         inGame = false;
         scanMode = false;
         tileGameCanvas.SetActive(false);
         Debug.Log(tileGameCanvas.activeInHierarchy);
+
+        score = 0;
+        digLimit = 3;
+        scanLimit = 6;
     }
 
     public void ScanTiles(int x, int y)
@@ -71,6 +82,11 @@ public class GameManager : MonoBehaviour
     public void ExtractMode()
     {
         scanMode = false;
+    }
+
+    public void AddScore(int scoreValue)
+    {
+        score += scoreValue;
     }
 
     public void EasyToggle()
