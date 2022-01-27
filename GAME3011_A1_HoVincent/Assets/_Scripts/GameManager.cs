@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     {
         // Initialize variables
         inGame = false;
-        scanMode = false;
+        //scanMode = false;
         tileGameCanvas.SetActive(false);
         Debug.Log(tileGameCanvas.activeInHierarchy);
 
@@ -73,17 +73,6 @@ public class GameManager : MonoBehaviour
     {
         promptText.SetActive(toggle);
     }
-
-    public void ScanMode()
-    {
-        scanMode = true;
-    }
-
-    public void ExtractMode()
-    {
-        scanMode = false;
-    }
-
     public void AddScore(int scoreValue)
     {
         score += scoreValue;
