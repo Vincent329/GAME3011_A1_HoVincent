@@ -75,7 +75,6 @@ public class TileGameFramework : MonoBehaviour
                 }
             }
         }
-
         StartCoroutine(forcedDelay(x, y));
         
     }

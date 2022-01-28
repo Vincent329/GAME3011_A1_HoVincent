@@ -123,6 +123,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &98451636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 98451636, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
+  m_PrefabInstance: {fileID: 5995323830560911048}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &255147825
 GameObject:
   m_ObjectHideFlags: 0
@@ -199,6 +204,11 @@ MonoBehaviour:
   m_TrackedDeviceOrientationAction: {fileID: 7970375526676320489, guid: ca9f5fa95ffab41fb9a615ab714db018, type: 3}
   m_DeselectOnBackgroundClick: 1
   m_PointerBehavior: 0
+--- !u!1 &412477207 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 412477207, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
+  m_PrefabInstance: {fileID: 5995323830560911048}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &547003864 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3490169941523432648, guid: ce56dac9084fac743a4f7193446aa199, type: 3}
@@ -334,7 +344,10 @@ MonoBehaviour:
   scanLimit: 0
   tileGameCanvas: {fileID: 1443471799}
   promptText: {fileID: 0}
-  DigPrompts: []
+  DigPrompts:
+  - {fileID: 1508337435}
+  - {fileID: 412477207}
+  - {fileID: 98451636}
 --- !u!4 &913239956
 Transform:
   m_ObjectHideFlags: 0
@@ -470,6 +483,11 @@ Transform:
 --- !u!1 &1443471799 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5995323829789773695, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
+  m_PrefabInstance: {fileID: 5995323830560911048}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1508337435 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1508337435, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
   m_PrefabInstance: {fileID: 5995323830560911048}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1522724735
@@ -796,38 +814,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 984701251, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
-      propertyPath: m_SizeDelta.x
-      value: 273.8619
-      objectReference: {fileID: 0}
-    - target: {fileID: 984701251, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 52.8544
-      objectReference: {fileID: 0}
-    - target: {fileID: 984701251, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 257.93335
-      objectReference: {fileID: 0}
-    - target: {fileID: 984701251, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -127.427185
-      objectReference: {fileID: 0}
-    - target: {fileID: 2436191202395285525, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -260
-      objectReference: {fileID: 0}
-    - target: {fileID: 5344582101974688752, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
-      propertyPath: m_Name
-      value: Digs Panel
-      objectReference: {fileID: 0}
-    - target: {fileID: 5758829515649641982, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
-      propertyPath: m_Name
-      value: Message Window
-      objectReference: {fileID: 0}
-    - target: {fileID: 5885387027278197904, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 913239955}
     - target: {fileID: 5995323829789773683, guid: 6d14c85697036cc4cbbb38acaae3971a, type: 3}
       propertyPath: m_Pivot.x
       value: 0

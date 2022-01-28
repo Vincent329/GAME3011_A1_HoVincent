@@ -32,6 +32,8 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private List<GameObject> DigPrompts;
+    [SerializeField]
+    private List<GameObject> ScanPrompts;
     // Delegates
     public delegate void ScanArea(int row, int column);
     public event ScanArea Scan;
@@ -70,6 +72,8 @@ public class GameManager : MonoBehaviour
     public void ScanTiles(int x, int y)
     {
         Scan(x, y);
+        scanLimit--;
+        ScanPrompts[scanLimit].SetActive(false);
     }
 
     public void toggleTileGameCanvas(bool toggle)

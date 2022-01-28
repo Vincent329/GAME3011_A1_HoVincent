@@ -126,12 +126,11 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             GameManager.Instance.UpdateDigIcons();
             active = false;
         } 
-            else if (GameManager.Instance.scanMode == true)
+            else if (GameManager.Instance.scanMode == true && GameManager.Instance.scanLimit > 0)
         {
             // figure out scan mode functionality here
             // decrement scan counter in game manager instance
             GameManager.Instance.ScanTiles(row, column);
         }
-            // delegate the handling of score here
     }
 }

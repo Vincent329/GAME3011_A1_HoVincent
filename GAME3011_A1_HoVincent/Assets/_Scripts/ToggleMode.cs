@@ -8,14 +8,15 @@ public class ToggleMode : MonoBehaviour
 {
     Button buttonComponent;
     [SerializeField]
-    bool test;
 
     // Start is called before the first frame update
     void Start()
     {
-        test = false;
         buttonComponent = GetComponent<Button>();
         buttonComponent.onClick.AddListener(SwitchToggle);
+
+        transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
+            GameManager.Instance.scanMode ? "Search Mode" : "Extract Mode";
     }
     
     private void SwitchToggle()
@@ -24,8 +25,7 @@ public class ToggleMode : MonoBehaviour
 
         GameManager.Instance.scanMode = !GameManager.Instance.scanMode;
         transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
-            GameManager.Instance.scanMode ? "Extract Mode" : "Search Mode";
-        test = !test;
+            GameManager.Instance.scanMode ? "Search Mode" : "Extract Mode";
 
        
     }
