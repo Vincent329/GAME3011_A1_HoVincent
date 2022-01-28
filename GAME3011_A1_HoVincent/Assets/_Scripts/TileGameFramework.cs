@@ -57,71 +57,25 @@ public class TileGameFramework : MonoBehaviour
         PlaceScoreValues();
     }
 
-    // Called by delegate for scan mode
-    void ScanSurroundingArea(int x, int y)
-    {
-        // first layer of surrounding tiles
-        for (int i = x - 1; i <= x + 1; i++)
-        {
-            for (int j = y - 1; j <= y + 1; j++)
-            {
-                if (i >= 0 && i < width && j >= 0 && j < height)
-                {
-                    tileAreaArray[i, j].RevealTileAtLocation(i, j);
-                } 
-                else
-                {
-                    Debug.Log("Out of bounds");
-                }
-            }
-        }
-        StartCoroutine(forcedDelay(x, y));
-        
-    }
 
-    IEnumerator forcedDelay(int x, int y)
-    {
-        Debug.Log("Delay");
-        yield return new WaitForSeconds(1.0f);
-        // first layer of surrounding tiles
-        for (int i = x - 1; i <= x + 1; i++)
-        {
-            for (int j = y - 1; j <= y + 1; j++)
-            {
-                if (i >= 0 && i < width && j >= 0 && j < height)
-                {
-                    tileAreaArray[i, j].ConcealTile();
-                }
-                else
-                {
-                    Debug.Log("Out of bounds");
-                }
-            }
-        }
-    }
     // this function will be used to delegate score values to the surrrounding tiles
     void PlaceScoreValues()
     {
-        int x = Random.Range(0, width);
-        int y = Random.Range(0, height);
-
-        // set the high grade tile
-
-        foreach(Tile highGradeTile in highGradeTiles)
+        for (int i = 0; i < 3; i++)
         {
+            int x = Random.Range(0, width);
+            int y = Random.Range(0, height);
+
+            // set the high grade tile
+            tileAreaArray[x, y].SetTileValue(TileType.HIGH_GRADE);
+            highGradeTiles.Add(tileAreaArray[x, y]);
+
+            AreaCheck(x, y);
         }
-        AreaCheck(x, y);
     }
 
-    void CheckSurroundingTile()
-    {
-
-    }
     void AreaCheck(int x, int y)
     {
-        tileAreaArray[x, y].SetTileValue(TileType.HIGH_GRADE);
-        highGradeTiles.Add(tileAreaArray[x, y]);
-
         // first layer of surrounding tiles
         for (int i = x - 1; i <= x + 1; i++)
         {
@@ -173,4 +127,47 @@ public class TileGameFramework : MonoBehaviour
         }
     }
 
+    // Called by delegate for scan mode
+    void ScanSurroundingArea(int x, int y)
+    {
+        // first layer of surrounding tiles
+        for (int i = x - 1; i <= x + 1; i++)
+        {
+            for (int j = y - 1; j <= y + 1; j++)
+            {
+                if (i >= 0 && i < width && j >= 0 && j < height)
+                {
+                    tileAreaArray[i, j].RevealTileAtLocation(i, j);
+                }
+                else
+                {
+                    Debug.Log("Out of bounds");
+                }
+            }
+        }
+        StartCoroutine(forcedDelay(x, y));
+
+    }
+
+    IEnumerator forcedDelay(int x, int y)
+    {
+        Debug.Log("Delay");
+        yield return new WaitForSeconds(1.0f);
+        // first layer of surrounding tiles
+        for (int i = x - 1; i <= x + 1; i++)
+        {
+            for (int j = y - 1; j <= y + 1; j++)
+            {
+                if (i >= 0 && i < width && j >= 0 && j < height)
+                {
+                    if (tileAreaArray[i,j].Diggable)
+                    tileAreaArray[i, j].ConcealTile();
+                }
+                else
+                {
+                    Debug.Log("Out of bounds");
+                }
+            }
+        }
+    }
 }

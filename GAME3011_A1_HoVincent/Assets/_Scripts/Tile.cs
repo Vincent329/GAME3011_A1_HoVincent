@@ -19,7 +19,10 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     public int ScoreValue => scoreValue;
 
     [SerializeField]
-    private bool active;
+    private bool diggable;
+
+    public bool Diggable => diggable;
+
 
     [SerializeField]
     private Sprite Covered, MinLoad, LowLoad, MidLoad, HighLoad;
@@ -36,7 +39,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         MidLoad = Resources.Load<Sprite>("Redstone");
         HighLoad = Resources.Load<Sprite>("Gold");
         TileDesignation();
-        active = true;
+        diggable = true;
     }
 
     public void SetTileValue(TileType type)
@@ -56,26 +59,26 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     {
         if (tileType == TileType.MINIMAL_GRADE)
         {
-            scoreValue = 0;
+            scoreValue = 25;
           //  imageComp.sprite = MinLoad;
           //  Debug.Log("Access");
         }
         else if (tileType == TileType.LOW_GRADE)
         {
-            scoreValue = 50;
+            scoreValue = 75;
            // imageComp.sprite = LowLoad;
 
         }
         else if (tileType == TileType.MID_GRADE)
         {
-            scoreValue = 100;
+            scoreValue = 150;
             //imageComp.sprite = MidLoad;
 
         }
         else if (tileType == TileType.HIGH_GRADE)
         {
             scoreValue = 300;
-            imageComp.sprite = HighLoad;
+            //imageComp.sprite = HighLoad;
         }
     }
 
@@ -116,7 +119,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
-        if (GameManager.Instance.scanMode == false && active == true 
+        if (GameManager.Instance.scanMode == false && diggable == true 
             && GameManager.Instance.digLimit > 0)
         {
             Debug.Log(scoreValue);
@@ -124,7 +127,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             GameManager.Instance.AddScore(scoreValue);
             // decrement the extraction value
             GameManager.Instance.UpdateDigIcons();
-            active = false;
+            diggable = false;
         } 
             else if (GameManager.Instance.scanMode == true && GameManager.Instance.scanLimit > 0)
         {
