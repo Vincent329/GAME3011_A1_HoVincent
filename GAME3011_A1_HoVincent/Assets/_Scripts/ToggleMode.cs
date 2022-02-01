@@ -7,7 +7,6 @@ using TMPro;
 public class ToggleMode : MonoBehaviour
 {
     Button buttonComponent;
-    [SerializeField]
 
     // Start is called before the first frame update
     void Start()

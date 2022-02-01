@@ -90,7 +90,7 @@ public class GameManager : MonoBehaviour
             {
                 scans.SetActive(false);
             }
-            ChangeText("Final Vincium Count: " + score + ". \n You can walk away from the volume to close the menu");
+            ChangeText("Final Vincium Count: " + score + ". \n You can press E to close the menu, or click Restart to rest the game");
         }
     }
 
@@ -136,7 +136,7 @@ public class GameManager : MonoBehaviour
         score = 0;
         digLimit = 3;
         scanLimit = 6;
-
+        ChangeText("Vincium Obtained: " + score);
         foreach (GameObject digs in DigPrompts)
         {
             digs.SetActive(true);
@@ -147,21 +147,5 @@ public class GameManager : MonoBehaviour
         }
         Reset();
     }
-
-    public void EasyToggle()
-    {
-
-    }
-
-    public void MediumToggle()
-    {
-
-    }
-
-    public void HardToggle()
-    {
-
-    }
-
 
 }

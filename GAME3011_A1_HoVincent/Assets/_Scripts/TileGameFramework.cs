@@ -36,6 +36,7 @@ public class TileGameFramework : MonoBehaviour
         // bind the function to the delegate in the singleton
         GameManager.Instance.Scan += ScanSurroundingArea;
         GameManager.Instance.Degrade += DegradeArea;
+        GameManager.Instance.Reset += Restart;
     }
 
     void InitGrid()
@@ -77,6 +78,15 @@ public class TileGameFramework : MonoBehaviour
 
     private void Restart()
     {
+        for (int i = 0; i < width; i++)
+        {
+            for (int j = 0; j < height; j++)
+            {
+                tileAreaArray[i, j].SetTileValue(TileType.MINIMAL_GRADE);
+                tileAreaArray[i, j].ConcealTile();
+            }
+        }
+
         highGradeTiles.Clear();
         PlaceScoreValues();
     }
@@ -90,9 +100,7 @@ public class TileGameFramework : MonoBehaviour
             {
                 if (i >= 0 && i < width && j >= 0 && j < height)
                 {
-                    Debug.Log(tileAreaArray[i, j]);
 
-                    Debug.Log("Possible Tile Found");
                     //if (i != x || j != y)
                     if (tileAreaArray[i, j].GetTileType != TileType.HIGH_GRADE)
                     {

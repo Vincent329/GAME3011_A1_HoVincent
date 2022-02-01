@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     private Rigidbody rb;
 
-    
+    public bool activeGame;
 
     private bool inRange; // activate input for the minigame while inside the hitbox
     public bool InRange
@@ -38,6 +38,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         //moveAction = playerInput.actions["Move"];
+        activeGame = false;
     }
 
     // Update is called once per frame
@@ -53,16 +54,24 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputValue value)
     {
-        Vector2 moveValue = value.Get<Vector2>();
-        playerVelocity = new Vector3(moveValue.x, 0, moveValue.y);
+        if (!activeGame)
+        {
+            Vector2 moveValue = value.Get<Vector2>();
+            playerVelocity = new Vector3(moveValue.x, 0, moveValue.y);
+        } else
+        {
+            playerVelocity = Vector3.zero;
+
+        }
     }
 
     public void OnActivate(InputValue value)
     {
         if (GameManager.Instance.inGame == true)
         {
+            activeGame = !activeGame;
             GameManager.Instance.TextToggle();
-            GameManager.Instance.toggleTileGameCanvas(true);
+            GameManager.Instance.toggleTileGameCanvas(activeGame);
         } else
         {
             Debug.Log("Not in the Zone");
