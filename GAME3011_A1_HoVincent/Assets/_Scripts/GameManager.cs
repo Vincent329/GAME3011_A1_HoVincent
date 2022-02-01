@@ -16,8 +16,11 @@ public class GameManager : MonoBehaviour
     public bool inGame;
     public bool scanMode;
 
-    [SerializeField]
-    private int score;
+    [SerializeField] private int score;
+    [SerializeField] private int goldOre;
+    [SerializeField] private int redOre;
+    [SerializeField] private int coatOre;
+    [SerializeField] private int stoneOre;
 
     public int digLimit;
     public int scanLimit;
@@ -32,6 +35,14 @@ public class GameManager : MonoBehaviour
     private GameObject tileGameCanvas;
     [SerializeField]
     private GameObject promptText;
+    [SerializeField]
+    private GameObject WinText;
+
+    [Header("Vincium Amounts")]
+    [SerializeField] private GameObject gold;
+    [SerializeField] private GameObject red;
+    [SerializeField] private GameObject coat;
+    [SerializeField] private GameObject stone;
 
     [SerializeField]
     private List<GameObject> DigPrompts;
@@ -71,12 +82,22 @@ public class GameManager : MonoBehaviour
         //scanMode = false;
         tileGameCanvas.SetActive(false);
         Debug.Log(tileGameCanvas.activeInHierarchy);
+        WinText.GetComponent<TextMeshProUGUI>().text = "";
+        ChangeText("Click a Tile to dig up Vincium.  Click the bottom left button to toggle scan and extract modes. Mine 2000 Vincium to win!");
 
-        ChangeText("Click a Tile to dig up Vincium.  Click the bottom left button to switch between scan and extract modes");
+        score       = 0;
+        goldOre     = 0;
+        redOre      = 0;
+        coatOre     = 0;
+        stoneOre    = 0;
 
-        score = 0;
-        digLimit = 3;
-        scanLimit = 6;
+        gold.GetComponent<TextMeshProUGUI>().text = ": " + goldOre;
+        red.GetComponent<TextMeshProUGUI>().text = ": " + redOre;
+        coat.GetComponent<TextMeshProUGUI>().text = ": " + coatOre;
+        stone.GetComponent<TextMeshProUGUI>().text = ": " + stoneOre;
+
+        digLimit    = 3;
+        scanLimit   = 6;
     }
 
     public void UpdateDigIcons()
@@ -91,6 +112,36 @@ public class GameManager : MonoBehaviour
                 scans.SetActive(false);
             }
             ChangeText("Final Vincium Count: " + score + ". \n You can press E to close the menu, or click Restart to rest the game");
+
+
+            WinText.GetComponent<TextMeshProUGUI>().text = score > 2000 ? "You Win!" : "You Lose!";
+        }
+    }
+
+    public void UpdateRunningResource(TileType type)
+    {
+        if (type == TileType.MINIMAL_GRADE)
+        {
+            stoneOre++;
+            stone.GetComponent<TextMeshProUGUI>().text = ": " + stoneOre;
+        }
+        else if (type == TileType.LOW_GRADE)
+        {
+            coatOre++;
+            coat.GetComponent<TextMeshProUGUI>().text = ": " + coatOre;
+
+        }
+        else if (type == TileType.MID_GRADE)
+        {
+            redOre++;
+            red.GetComponent<TextMeshProUGUI>().text = ": " + redOre;
+
+        }
+        else if (type == TileType.HIGH_GRADE)
+        {
+            goldOre++;
+            gold.GetComponent<TextMeshProUGUI>().text = ": " + goldOre;
+
         }
     }
 
@@ -134,8 +185,20 @@ public class GameManager : MonoBehaviour
     public void ResetTheGame()
     {
         score = 0;
+        goldOre = 0;
+        redOre = 0;
+        coatOre = 0;
+        stoneOre = 0;
+
         digLimit = 3;
         scanLimit = 6;
+
+        gold.GetComponent<TextMeshProUGUI>().text = ": " + goldOre;
+        red.GetComponent<TextMeshProUGUI>().text = ": " + redOre;
+        coat.GetComponent<TextMeshProUGUI>().text = ": " + coatOre;
+        stone.GetComponent<TextMeshProUGUI>().text = ": " + stoneOre;
+
+        WinText.GetComponent<TextMeshProUGUI>().text = "";
         ChangeText("Vincium Obtained: " + score);
         foreach (GameObject digs in DigPrompts)
         {

@@ -20,12 +20,11 @@ public class ToggleMode : MonoBehaviour
     
     private void SwitchToggle()
     {
-        Debug.Log("Switch");
-
-        GameManager.Instance.scanMode = !GameManager.Instance.scanMode;
-        transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
-            GameManager.Instance.scanMode ? "Search Mode" : "Extract Mode";
-
-       
+        if (GameManager.Instance.digLimit > 0)
+        {
+            GameManager.Instance.scanMode = !GameManager.Instance.scanMode;
+            transform.GetChild(0).GetComponent<TextMeshProUGUI>().text =
+                GameManager.Instance.scanMode ? "Search Mode" : "Extract Mode";
+        }    
     }
 }

@@ -44,6 +44,7 @@ public class Tile : MonoBehaviour, IPointerClickHandler
 
     public void SetTileValue(TileType type)
     {
+        StopAllCoroutines();
         tileType = type;
         Debug.Log(tileType);
         TileDesignation();
@@ -91,12 +92,10 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         else if (tileType == TileType.LOW_GRADE)
         {
             imageComp.sprite = LowLoad;
-
         }
         else if (tileType == TileType.MID_GRADE)
         {
             imageComp.sprite = MidLoad;
-
         }
         else if (tileType == TileType.HIGH_GRADE)
         {
@@ -141,11 +140,12 @@ public class Tile : MonoBehaviour, IPointerClickHandler
         if (GameManager.Instance.scanMode == false && diggable == true 
             && GameManager.Instance.digLimit > 0)
         {
-            Debug.Log(scoreValue);
             RevealTile();
             GameManager.Instance.AddScore(scoreValue);
+
             // decrement the extraction value
             GameManager.Instance.UpdateDigIcons();
+            GameManager.Instance.UpdateRunningResource(tileType);
             StartCoroutine(depleteTile());
 
             // Degrade surrounding area
