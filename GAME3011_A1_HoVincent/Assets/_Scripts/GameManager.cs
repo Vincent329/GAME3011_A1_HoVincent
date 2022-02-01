@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.Events;
+using TMPro;
 
 /// <summary>
 /// Singleton that keeps track of UI elements and Game Statistics
@@ -25,6 +27,7 @@ public class GameManager : MonoBehaviour
         get => instance;
     }
 
+    [Header("In Game Elements")]
     [SerializeField]
     private GameObject tileGameCanvas;
     [SerializeField]
@@ -34,9 +37,20 @@ public class GameManager : MonoBehaviour
     private List<GameObject> DigPrompts;
     [SerializeField]
     private List<GameObject> ScanPrompts;
+
+
     // Delegates
     public delegate void ScanArea(int row, int column);
     public event ScanArea Scan;
+
+    public delegate void DegradeArea(int row, int column);
+    public event DegradeArea Degrade;
+
+    public delegate void ToggleText();
+    public event ToggleText Toggle;
+    
+    public delegate void ResetGame();
+    public event ResetGame Reset;
 
     private void Awake()
     {
@@ -58,6 +72,8 @@ public class GameManager : MonoBehaviour
         tileGameCanvas.SetActive(false);
         Debug.Log(tileGameCanvas.activeInHierarchy);
 
+        ChangeText("Click a Tile to dig up Vincium.  Click the bottom left button to switch between scan and extract modes");
+
         score = 0;
         digLimit = 3;
         scanLimit = 6;
@@ -67,6 +83,15 @@ public class GameManager : MonoBehaviour
     {
         digLimit--;
         DigPrompts[digLimit].SetActive(false);
+        if (digLimit <= 0)
+        {
+            scanLimit = 0;
+            foreach (GameObject scans in ScanPrompts)
+            {
+                scans.SetActive(false);
+            }
+            ChangeText("Final Vincium Count: " + score + ". \n You can walk away from the volume to close the menu");
+        }
     }
 
     public void ScanTiles(int x, int y)
@@ -74,6 +99,16 @@ public class GameManager : MonoBehaviour
         Scan(x, y);
         scanLimit--;
         ScanPrompts[scanLimit].SetActive(false);
+    }
+
+    public void DegradeTiles(int x, int y)
+    {
+        Degrade(x, y);
+    }
+
+    public void TextToggle()
+    {
+        Toggle(); 
     }
 
     public void toggleTileGameCanvas(bool toggle)
@@ -88,6 +123,29 @@ public class GameManager : MonoBehaviour
     public void AddScore(int scoreValue)
     {
         score += scoreValue;
+        ChangeText("Vincium Obtained: " + score);
+    }
+
+    public void ChangeText(string text)
+    {
+        promptText.GetComponent<TextMeshProUGUI>().text = text;
+    }
+
+    public void ResetTheGame()
+    {
+        score = 0;
+        digLimit = 3;
+        scanLimit = 6;
+
+        foreach (GameObject digs in DigPrompts)
+        {
+            digs.SetActive(true);
+        }
+        foreach (GameObject scans in ScanPrompts)
+        {
+            scans.SetActive(true);
+        }
+        Reset();
     }
 
     public void EasyToggle()

@@ -89,5 +89,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc02a8d2befbf9e49ac82b90aaa32906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tileType: 3
+  row: 0
+  column: 0
+  tileType: 0
+  imageComp: {fileID: 0}
   scoreValue: 0
+  diggable: 0
+  Covered: {fileID: 0}
+  MinLoad: {fileID: 0}
+  LowLoad: {fileID: 0}
+  MidLoad: {fileID: 0}
+  HighLoad: {fileID: 0}

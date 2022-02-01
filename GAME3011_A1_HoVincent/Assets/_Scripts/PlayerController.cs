@@ -12,6 +12,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 playerVelocity;
     private Rigidbody rb;
 
+    
+
     private bool inRange; // activate input for the minigame while inside the hitbox
     public bool InRange
     {
@@ -59,6 +61,7 @@ public class PlayerController : MonoBehaviour
     {
         if (GameManager.Instance.inGame == true)
         {
+            GameManager.Instance.TextToggle();
             GameManager.Instance.toggleTileGameCanvas(true);
         } else
         {

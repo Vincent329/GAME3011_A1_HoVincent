@@ -4,10 +4,9 @@ using UnityEngine;
 
 public enum TileType
 {
-    HIGH_GRADE,
-    MID_GRADE,
-    LOW_GRADE,
     MINIMAL_GRADE,
-    EMPTY,
+    LOW_GRADE,
+    MID_GRADE,
+    HIGH_GRADE,
     NUM_OF_TILETYPES
 }

@@ -59,25 +59,25 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     {
         if (tileType == TileType.MINIMAL_GRADE)
         {
-            scoreValue = 25;
+            scoreValue = 125;
           //  imageComp.sprite = MinLoad;
           //  Debug.Log("Access");
         }
         else if (tileType == TileType.LOW_GRADE)
         {
-            scoreValue = 75;
+            scoreValue = 250;
            // imageComp.sprite = LowLoad;
 
         }
         else if (tileType == TileType.MID_GRADE)
         {
-            scoreValue = 150;
+            scoreValue = 500;
             //imageComp.sprite = MidLoad;
 
         }
         else if (tileType == TileType.HIGH_GRADE)
         {
-            scoreValue = 300;
+            scoreValue = 1000;
             //imageComp.sprite = HighLoad;
         }
     }
@@ -116,6 +116,25 @@ public class Tile : MonoBehaviour, IPointerClickHandler
     {
         imageComp.sprite = Covered;
     }
+    IEnumerator depleteTile()
+    {
+        yield return new WaitForSeconds(1.0f);
+        tileType = TileType.MINIMAL_GRADE;
+        imageComp.sprite = MinLoad;
+    }
+
+    /// <summary>
+    /// Testing the degrading of a tile
+    /// </summary>
+    public void DegradeTile()
+    {
+        if (tileType > (int)TileType.MINIMAL_GRADE)
+        {
+            Debug.Log("Degrade Tile");
+            tileType--;
+        }
+        TileDesignation();
+    }
 
     public void OnPointerClick(PointerEventData pointerEventData)
     {
@@ -127,6 +146,10 @@ public class Tile : MonoBehaviour, IPointerClickHandler
             GameManager.Instance.AddScore(scoreValue);
             // decrement the extraction value
             GameManager.Instance.UpdateDigIcons();
+            StartCoroutine(depleteTile());
+
+            // Degrade surrounding area
+            GameManager.Instance.DegradeTiles(row, column);
             diggable = false;
         } 
             else if (GameManager.Instance.scanMode == true && GameManager.Instance.scanLimit > 0)

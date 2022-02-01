@@ -35,6 +35,7 @@ public class TileGameFramework : MonoBehaviour
 
         // bind the function to the delegate in the singleton
         GameManager.Instance.Scan += ScanSurroundingArea;
+        GameManager.Instance.Degrade += DegradeArea;
     }
 
     void InitGrid()
@@ -61,7 +62,7 @@ public class TileGameFramework : MonoBehaviour
     // this function will be used to delegate score values to the surrrounding tiles
     void PlaceScoreValues()
     {
-        for (int i = 0; i < 3; i++)
+        for (int i = 0; i < 10; i++)
         {
             int x = Random.Range(0, width);
             int y = Random.Range(0, height);
@@ -72,6 +73,12 @@ public class TileGameFramework : MonoBehaviour
 
             AreaCheck(x, y);
         }
+    }
+
+    private void Restart()
+    {
+        highGradeTiles.Clear();
+        PlaceScoreValues();
     }
 
     void AreaCheck(int x, int y)
@@ -96,7 +103,6 @@ public class TileGameFramework : MonoBehaviour
                     {
                         Debug.Log("This is a High Grade Tile");
                     }
-
                 }
             }
         }
@@ -126,7 +132,28 @@ public class TileGameFramework : MonoBehaviour
             }
         }
     }
+    #region ----------- Degrade Tiles -----------------
 
+    void DegradeArea(int x, int y)
+    {
+        //2nd layer of surrounding tiles
+        for (int i = x - 2; i <= x + 2; i++)
+        {
+            for (int j = y - 2; j <= y + 2; j++)
+            {
+                if (i >= 0 && i < width && j >= 0 && j < height)
+                {
+                    Debug.Log("Degrading "+ tileAreaArray[i, j]);
+                    
+                        tileAreaArray[i, j].DegradeTile();
+                        Debug.Log(tileAreaArray[i, j].ScoreValue);
+
+                }
+            }
+        }
+    }
+    #endregion
+    #region ---------------SCAN AREA----------------------------
     // Called by delegate for scan mode
     void ScanSurroundingArea(int x, int y)
     {
@@ -146,7 +173,6 @@ public class TileGameFramework : MonoBehaviour
             }
         }
         StartCoroutine(forcedDelay(x, y));
-
     }
 
     IEnumerator forcedDelay(int x, int y)
@@ -170,4 +196,5 @@ public class TileGameFramework : MonoBehaviour
             }
         }
     }
+    #endregion
 }
