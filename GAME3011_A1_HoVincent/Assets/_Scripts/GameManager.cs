@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour
             {
                 scans.SetActive(false);
             }
-            ChangeText("Final Vincium Count: " + score + ". \n You can press E to close the menu, or click Restart to rest the game");
+            ChangeText("Final Vincium Count: " + score + ". \n You can press E to close the menu, or click Restart to reset the game");
 
 
             WinText.GetComponent<TextMeshProUGUI>().text = score > 2000 ? "You Win!" : "You Lose!";
